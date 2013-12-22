@@ -4,3 +4,10 @@ development:
   username: root
   password:
   host: localhost
+
+production:
+  adapter: mysql2
+  database: muni_maps
+  username: www-data
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: localhost

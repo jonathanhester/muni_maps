@@ -15,6 +15,9 @@ class Stop < ActiveRecord::Base
   end
 
   def self.refresh(stops)
+    #HTTParty parses multiple xml nodes of the same name into an array
+    #but if there's only 1, it's just the hash
+    stops = [stops] unless stops.is_a? Array
     stops.each do |stop|
       tag = stop["tag"]
       title = stop["title"]

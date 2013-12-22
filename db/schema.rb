@@ -12,6 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20131220214013) do
 
+  create_table "bus_routes", force: true do |t|
+    t.string   "tag"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "direction_stops", force: true do |t|
     t.integer  "direction_id"
     t.integer  "stop_id"
@@ -23,14 +30,7 @@ ActiveRecord::Schema.define(version: 20131220214013) do
     t.string   "tag"
     t.string   "title"
     t.string   "name"
-    t.integer  "route_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "routes", force: true do |t|
-    t.string   "tag"
-    t.string   "title"
+    t.integer  "bus_route_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20131220214013) do
     t.string   "stop_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "lng"
   end
 
 end

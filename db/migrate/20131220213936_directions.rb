@@ -5,7 +5,7 @@ class Directions < ActiveRecord::Migration
       t.string :tag
       t.string :title
       t.string :name
-      t.references :bus_stops
+      t.references :bus_route
 
       t.timestamps
     end

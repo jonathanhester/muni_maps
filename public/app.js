@@ -78,7 +78,7 @@
 		function getStationWindowContent(station, predictions) {
             //removes occasional scrollbar on linux
             //http://www.canbike.ca/information-technology/2013/11/01/firefox-infowindow-scrollbar-fix-google-maps-api-v3.html
-			var content = "<div style=\"line-height:1.35;overflow:hidden;white-space:nowrap;\"";
+			var content = "<div style=\"line-height:1.35;overflow:hidden;white-space:nowrap;\">";
 			content += station.title;
 			content += "<br />";
 
