@@ -1,0 +1,55 @@
+1) Persist all routes. Routes shouldn't change frequently so only update every day or week
+
+eg
+http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni
+
+Route:
+tag, title, shortTitle
+
+2) Persist all Stops, Directions and Paths for Route. Shouldn't change frequently so only update every day or week
+
+eg
+http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=6
+
+Stop:
+tag, title, shortTitle (optional), lat, lng, stopId
+
+Direction:
+tag, title, name
+route_id
+
+DirectionStops:
+stop_id
+direction_id
+
+(Path is optional. Do this at the end)
+Path:
+lat,lng
+route_id
+
+2) client gives lat/lng bounds requesting data
+server returns:
+[
+ {title: "Haight St & Baker St", lat: "37.77093", lon:"-122.4402599", stopId: "14940", stopTag: "4940",
+   routes: [
+    {tag: "6", title: "6-Parnassus", direction: "Outbound to the Sunset District"},
+    {tag: "71", title: "71-Haight/Noriega", direction: "Outbound to the Sunset District"}
+   ]
+ },
+ ....
+]
+
+Client queries service directly to get predictions. Two ways to get predictions 
+1) separate request for every stop
+eg 
+http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&stopId=14940
+2) bulk request but must use (stops=6|5711&stops=6|4940&stops=71|4940) so watch for query string being too large
+http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops&a=sf-muni&stops=6|5711&stops=6|4940&stops=71|4940
+
+Stops
+[
+ {title: "Haight St & Baker St", lat: "37.77093", lon:"-122.4402599", 
+  predictions: [
+	{route: "6-Parnassus", direction: "Outbound to the Sunset District", arrivals: "6min, 12min, & 24min"},
+	{route: "71-Haight/Noriega", direction: "Outbound to the Sunset District", arrivals: "5min, 14min, & 25min"}]
+]

@@ -1,0 +1,14 @@
+[
+ {
+ 	"title": "Haight St & Baker St", 
+ 	"lat": "37.77093", 
+ 	"lng":"-122.4402599", 
+ 	"stopId": "14940", 
+ 	"stopTag": "4940",
+   	"routes": [
+    	{"routeTag": "6"},
+    	{"routeTag": "71"}
+   	]
+ }
+
+]
