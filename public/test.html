@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MuniMap QUnit tests</title>
+    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.12.0.css">
+    <script src="http://code.jquery.com/qunit/qunit-1.12.0.js"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=&sensor=false"></script>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="muni_map.js"></script>
+    <script>
+        test('loads predictions', function () {
+            var map = new google.maps.Map(document.getElementById("mock-map"));
+
+            var muniMap = new MuniMap(map, 0, 0);
+            var options = null;
+
+            //mock the call to get the stations
+            jQuery.ajax = function (param) {
+                options = param;
+            };
+            muniMap.loadPredictions(0, 0, function (data) {
+                var firstPrediction = data.predictions["3819"]["37"];
+                equal(firstPrediction.direction, "Inbound ...");
+                equal(firstPrediction.predictions[0].minutes, "1");
+                equal(firstPrediction.predictions[0].seconds, "34");
+                equal(data.predictions["3819"].stopTitle, "Haight/Baker");
+                equal(firstPrediction.routeTitle, "24");
+            });
+            var mockStations = [
+                {lat:0, lng:0, routes:[
+                    {routeTag:"6"}
+                ], stopId:"1", stopTag:"2"}
+            ];
+
+            options.success(mockStations);
+
+            jQuery.ajax = function (param) {
+                options = param;
+            };
+            var buffer = '<predictions routeTag="37" stopTag="3819" stopTitle="Haight/Baker" ';
+            buffer += 'routeTitle="24">';
+            buffer += '<direction title="Inbound ..."><prediction seconds="34" minutes="1">';
+            buffer += '</prediction>aaa</direction><Item>bbb</Item></predictions>';
+            var parser = new DOMParser();
+            var mockPredictionsXml = parser.parseFromString(buffer, "text/xml");
+            //mock the call to get the predictions
+            options.success(mockPredictionsXml);
+        });
+    </script>
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<div id="mock-map" style="display: none;"></div>
+
+
+</body>
+</html>

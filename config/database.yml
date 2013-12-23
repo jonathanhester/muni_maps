@@ -11,3 +11,10 @@ production:
   username: www-data
   password: <%= ENV['DB_PASSWORD'] %>
   host: localhost
+
+test:
+  adapter: mysql2
+  database: muni_maps_test
+  username: root
+  password:
+  host: localhost

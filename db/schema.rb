@@ -39,11 +39,11 @@ ActiveRecord::Schema.define(version: 20131220214013) do
     t.string   "tag"
     t.string   "title"
     t.string   "short_title"
-    t.float    "lat"
+    t.decimal  "lat",         precision: 11, scale: 7
+    t.decimal  "lng",         precision: 11, scale: 7
     t.string   "stop_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "lng"
   end
 
 end

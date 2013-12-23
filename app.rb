@@ -1,10 +1,10 @@
 require 'sinatra'
 require 'sinatra/activerecord'
-require './models/direction'
-require './models/direction_stop'
-require './models/bus_route'
-require './models/stop'
-require './muni_api'
+require_relative './models/direction'
+require_relative './models/direction_stop'
+require_relative './models/bus_route'
+require_relative './models/stop'
+require_relative './muni_api'
 
 
 get '/' do

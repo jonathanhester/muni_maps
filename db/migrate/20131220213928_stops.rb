@@ -5,8 +5,8 @@ class Stops < ActiveRecord::Migration
       t.string :tag
       t.string :title
       t.string :short_title
-      t.float :lat
-      t.float :lng
+      t.decimal :lat, precision: 11, scale: 7
+      t.decimal :lng, precision: 11, scale: 7
       t.string :stop_id
 
       t.timestamps
