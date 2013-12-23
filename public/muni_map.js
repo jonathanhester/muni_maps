@@ -2,6 +2,8 @@
     function MuniMap(map, lat, lng) {
         var infowindow;
         var busStopMarkersCache = {};
+        var maxHeight;
+        var maxWidth;
 
         var userLocation = new google.maps.Marker({
             position:new google.maps.LatLng(lat, lng),
@@ -14,6 +16,11 @@
             zIndex:999,
             map:map
         });
+
+        //the infowindows can be too big on mobile for bus stops with a lot of
+        //routes
+        maxHeight = 0.5 * $(window).height();
+        maxWidth = 0.5 * $(window).width();
 
         function loadPredictions(lat, lng, callback) {
             var params = {lat:lat, lng:lng};
@@ -42,7 +49,7 @@
         function getStationWindowContent(station, predictions) {
             //removes occasional scrollbar on linux
             //http://www.canbike.ca/information-technology/2013/11/01/firefox-infowindow-scrollbar-fix-google-maps-api-v3.html
-            var content = "<div style=\"line-height:1.35;overflow:hidden;white-space:nowrap;\">";
+            var content = "<div style=\"max-height: " + maxHeight + "px; max-width: " + maxWidth + "px;\">";
             content += station.title;
             content += "<br />";
 

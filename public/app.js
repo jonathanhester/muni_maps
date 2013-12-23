@@ -24,7 +24,7 @@ google.maps.event.addDomListener(window, 'load', function () {
 
             var mapOptions = $.extend(getGoogleMapOptions(), {
                 center:new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                zoom:18
+                zoom:17
             });
             var map = new google.maps.Map(document.getElementById("map-canvas"),
                 mapOptions);
