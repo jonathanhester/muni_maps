@@ -16,6 +16,12 @@
         #map-canvas {
             height: 100%
         }
+        #waiting-message {
+            padding-top: 20px;
+            text-align: center;
+            font-size: 150%;
+            color: #FF0000;
+        }
     </style>
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=&sensor=false"></script>
@@ -24,6 +30,13 @@
     <script type="text/javascript" src="app.js"></script>
 </head>
 <body>
-<div id="map-canvas"/>
+
+<div id="map-canvas">
+    <div id="waiting-message">
+        Waiting for location
+    </div>
+</div>
+
+
 </body>
 </html>
