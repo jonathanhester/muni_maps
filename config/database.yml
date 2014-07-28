@@ -6,7 +6,7 @@ development:
   host: localhost
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   database: muni_maps
   username: www-data
   password: <%= ENV['DB_PASSWORD'] %>
